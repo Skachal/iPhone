@@ -57,8 +57,7 @@
       filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
       mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
                   linear-gradient(to bottom, black 0%, black 85%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
-                          linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0.005) 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000000 20%, #000000 80%, #00000024 100%), linear-gradient(to bottom, #000000 0%, rgb(0 0 0) 85%, #00000000 100%);
       mask-composite: intersect;
       -webkit-mask-composite: destination-in;
       }
