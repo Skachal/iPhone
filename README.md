@@ -16,8 +16,8 @@ Upgrade Finance — это современное веб-приложение и
 
 ## 🚀 Демо
 
-Открыть сайт:
-https://skachal.github.io/iPhone
+Открыть сайт:  
+[https://skachal.github.io/iPhone](https://skachal.github.io/iPhone)
 
 ## 📦 Скачать APK
 
@@ -27,6 +27,6 @@ https://skachal.github.io/iPhone
 
 ## 📁 Установка вручную
 
-1. Клонируйте репозиторий:
-   ```bash
-   git clone https://github.com/Skachal/iPhone.git
+```bash
+git clone https://github.com/Skachal/iPhone.git
+cd iPhone
