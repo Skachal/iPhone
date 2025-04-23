@@ -3,13 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>luche chem 1C Predpriyatie</title>
+    <title>Pocket Lawyer</title>
     <style>
-      * {
-        box-sizing: border-box;
-      }
-      html {
-  scroll-behavior: smooth;
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+
+      #loading-screen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0a0a0a, #1e1e1e);
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.loader {
+  width: 80px;
+  height: 80px;
+  border: 8px solid #5abcea;
+  border-top: 8px solid transparent;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}
+
+#loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 
@@ -24,16 +53,16 @@
       }
 
       .hero-section {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  padding: 80px 20px 180px;
-  background: transparent;
-  overflow: visible;
-}
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 80px 20px 180px;
+        background: transparent;
+        overflow: visible;
+      }
 
       .phone-preview {
         position: absolute;
@@ -51,15 +80,13 @@
 
       .phone-preview img {
         width: 600px;
-
         height: auto;
         filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
-      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
-      mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
-                  linear-gradient(to bottom, black 0%, black 85%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000000 20%, #000000 80%, #00000024 100%), linear-gradient(to bottom, #000000 0%, rgb(0 0 0) 85%, #00000000 100%);
-      mask-composite: intersect;
-      -webkit-mask-composite: destination-in;
+        mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
+                    linear-gradient(to bottom, black 0%, black 85%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, #000000 20%, #000000 80%, #00000024 100%), linear-gradient(to bottom, #000000 0%, rgb(0 0 0) 85%, #00000000 100%);
+        mask-composite: intersect;
+        -webkit-mask-composite: destination-in;
       }
 
       .text-block {
@@ -126,44 +153,33 @@
 
       .container1, .container2 {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        padding: 60px 10%;
-        gap: 50px;
-        flex-wrap: wrap;
+        padding: 80px 10%;
         max-width: 100%;
       }
 
       .section {
-        text-align: center;
-        max-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+        text-align: left;
       }
 
-      .section h2 {
-        font-size: 1.6rem;
-        margin-bottom: 20px;
-      }
-
-      .phone {
-        position: relative;
+      .section h3 {
+        margin-bottom: 10px;
       }
 
       .phone img {
         width: 100%;
-        max-width: 300px;
+        max-width: 200px;
         filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
       }
 
-      .description {
-        font-size: 1rem;
-        color: #b0b0b0;
-        margin-top: 20px;
-      }
-
       .icon-box {
-        text-align: center;
-        flex: 1;
         max-width: 300px;
       }
 
@@ -177,100 +193,265 @@
         animation: pulse 2.5s infinite;
       }
 
+      .description {
+        font-size: 1rem;
+        color: #b0b0b0;
+        margin-top: 10px;
+      }
+
+
+      .fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.fade-in.show {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+.features-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+.feature-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 30px;
+  background: #1e1e1e;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  
+  flex-wrap: wrap;
+  margin: 0 auto 40px;
+  width: fit-content;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 40px rgba(96, 90, 255, 0.4);
+}
+
+.card-phone img {
+  width: 160px;
+  border-radius: 12px;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+}
+
+.card-icon {
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #605aff, #38BDF8);
+  filter: drop-shadow(0 0 12px #605aff) drop-shadow(0 0 18px #38BDF8);
+  animation: pulse 2.5s infinite;
+  margin-bottom: 10px;
+}
+
+.card-content {
+  max-width: 300px;
+  padding: 40px 30px 30px;
+    border-radius: 20px;
+    background: rgb(28 36 55 / 27%);
+}
+
+.card-content h3 {
+  margin: 0 0 10px;
+}
+
+.card-content .description {
+  font-size: 1rem;
+  color: #b0b0b0;
+  margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .feature-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .card-phone img {
+    width: 180px;
+  }
+}
+
+
       @keyframes pulse {
-        0% {
-          filter: drop-shadow(0 0 8px #605aff) drop-shadow(0 0 12px #38BDF8);
-        }
-        50% {
-          filter: drop-shadow(0 0 14px #605aff) drop-shadow(0 0 20px #38BDF8);
-        }
-        100% {
-          filter: drop-shadow(0 0 8px #605aff) drop-shadow(0 0 12px #38BDF8);
-        }
+        0% { filter: drop-shadow(0 0 8px #605aff) drop-shadow(0 0 12px #38BDF8); }
+        50% { filter: drop-shadow(0 0 14px #605aff) drop-shadow(0 0 20px #38BDF8); }
+        100% { filter: drop-shadow(0 0 8px #605aff) drop-shadow(0 0 12px #38BDF8); }
       }
 
       @media (max-width: 900px) {
-        .container1, .container2 {
+        .section {
+          display: inline-flex;
           flex-direction: column;
           text-align: center;
-          padding: 40px 5%;
         }
-
         .text-block h1 {
           font-size: 2.8rem;
         }
       }
+
       @media screen and (min-height: 450px) {
-        .hero-section{
-          min-height:0px;
-        }
-      }
+  .hero-section {
+    min-height: 0px;
+  }
+
+  .container2 .section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 50px;
+    text-align: left;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .container2 .section .phone img {
+    width: 150px;
+  }
+
+  .container2 .section .icon-box {
+    max-width: 300px;
+  }
+}
+
     </style>
   </head>
   <body>
+    <div id="loading-screen">
+      <div class="loader"></div>
+    </div>
     <div class="hero-section">
       <div class="phone-preview">
         <img src="./iPhone 16 - 0.png" alt="Превью приложения" />
       </div>
-      <div class="text-block">
+      <div class="text-block fade-in">
         <h1>Финансовый контроль</h1>
-        <p>Следите за своим балансом, прибылью и расходами. Визуальный анализ продаж и статистика в реальном времени — всё в одном приложении.</p>
+        <p>Следите за своим балансом, прибылью и расходами, сдавайте отчётность по щелчку пальца и составляйте документы без лишней мороки. Визуальный анализ продаж и статистика в реальном времени — всё в одном приложении.</p>
         <div class="buttons">
           <a href="./app-release (1).apk" class="btn btn-primary" style="text-decoration: none;" download>Скачать APK</a>
           <button class="btn btn-secondary" onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' });">Подробнее</button>
-
         </div>
       </div>
     </div>
+
+    <section id="about" class="features">
+      <div class="container2 icons fade-in">
+        <h2 style="text-align:center">О приложении Pocket Lawyer</h2>
+        <p class="description">
+          Pocket Lawyer — это мощный и интуитивно понятный инструмент для управления финансами. Вы сможете отслеживать доходы и расходы, формировать отчёты, сдавать формы, обратиться в поддержку за мгновенной помощью и получать визуальный анализ финансов прямо на экране. Всё это — в одном компактном и надёжном приложении.
+        </p>
+      </div>
+    </section>
 
     <section class="features">
-      <div class="container2 icons">
-        <div class="icon-box">
-          <img src="https://img.icons8.com/ios/50/list.png"/>
-          <h2>Удобный учёт</h2>
-          <p class="description">Интерфейс «Формы»</p>
-        </div>
-        <div class="icon-box">
-          <img src="https://img.icons8.com/ios/50/combo-chart--v1.png"/>
-          <h2>Финансовый анализ</h2>
-          <p class="description">Интерфейс «Финансовый анализ»</p>
-        </div>
-        <div class="icon-box">
-          <img src="https://img.icons8.com/ios/50/chat--v1.png"/>
-          <h2>Поддержка</h2>
-          <p class="description">Интерфейс «Чат поддержки»</p>
-        </div>
-      </div>
-    </section>
-    <section id="about" class="features">
-      <div class="container2 icons">
-        <h2>О приложении Luchshe chem 1C</h2>
-<p class="description">
-  Luchshe chem 1C — это мощный и интуитивно понятный инструмент для управления финансами.
-  Вы сможете отслеживать доходы и расходы, формировать отчёты, сдавать формы без приложения егов, обратится в быструю поддержку для получения 
-  помощи в освоении приложения и
-  получать визуальный анализ финансов прямо на экране. Всё это в одном компактном и надёжном приложении.
-</p>
+      <h2 style="text-align: center; font-size: 2rem; margin-bottom: 40px;">Обзор продукта</h2>
 
-      </div>
-    </section>
-    
-    <div class="container1">
-      <div class="section">
-        <div class="phone">
-          <img src="iPhone 16 - 3.png" alt="Форма" />
+      <div class="features-container"  style="margin: 0 auto 40px; width: 90%;">
+      <div class="container2 feature-card"  style="display: block; flex-direction: column; align-items: center;">
+        <div class="section fade-in">
+          <div class="phone">
+            <img src="iPhone 16 - 3.png" alt="Форма" />
+          </div>
+          <div class="icon-box">
+            <img src="https://img.icons8.com/ios/50/list.png"/>
+            <h3>Удобный учёт</h3>
+            <p class="description">Интерфейс «Формы» позволяет легко заполнять и отправлять документы без бумажной волокиты.</p>
+          </div>
         </div>
-      </div>
-      <div class="section">
-        <div class="phone">
-          <img src="iPhone 16 - 4.png" alt="Финансовый анализ" />
+
+        <div class="section fade-in" style="flex-direction: row-reverse;">
+          <div class="phone">
+            <img src="iPhone 16 - 4.png" alt="Финансовый анализ" />
+          </div>
+          <div class="icon-box">
+            <img src="https://img.icons8.com/ios/50/combo-chart--v1.png"/>
+            <h3>Финансовый анализ</h3>
+            <p class="description">Графики и отчёты — всё автоматически. Визуализируйте финансы и принимайте решения быстрее.</p>
+          </div>
         </div>
-      </div>
-      <div class="section">
-        <div class="phone">
-          <img src="iPhone 16 - 2.png" alt="Чат поддержки" />
+
+        <div class="section fade-in">
+          <div class="phone">
+            <img src="iPhone 16 - 2.png" alt="Чат поддержки" />
+          </div>
+          <div class="icon-box">
+            <img src="https://img.icons8.com/ios/50/chat--v1.png"/>
+            <h3>Поддержка</h3>
+            <p class="description">Встроенный чат с нашей командой поможет разобраться в любой ситуации за считанные минуты.</p>
+          </div>
         </div>
       </div>
     </div>
+
+      <div class="features-container">
+      <div class="feature-card">
+        <div class="section fade-in"  style="flex-direction: row-reverse;">
+          <div class="card-content">
+            <img class="card-icon" src="https://img.icons8.com/ios/50/book.png"/>
+            <h3>Бухгалтерия для чайников</h3>
+            <p class="description">Вести финансы стало просто: всё, что вам нужно, подскажет встроенный ИИ-ассистент.</p>
+          </div>
+        </div>
+  
+        <div class="section fade-in">
+          <div class="card-content">
+            <img class="card-icon" src="https://img.icons8.com/ios/50/online-support.png"/>
+            <h3>Цифровой помощник</h3>
+            <p class="description">Консультируйтесь с ИИ и находите оптимальные решения без стресса и сложностей.</p>
+          </div>
+        </div>
+  
+        <div class="section fade-in"  style="flex-direction: row-reverse;">
+          <div class="card-content">
+            <img class="card-icon" src="https://img.icons8.com/ios/50/checked.png"/>
+            <h3>И многое другое</h3>
+            <p class="description">Работа с налогами, подсказки по управлению бизнесом, интеграции — всё уже внутри.</p>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+      
+    </section>
+
+
+
+
+    <script>
+      window.addEventListener('load', () => {
+    const loader = document.getElementById('loading-screen');
+    loader.classList.add('hidden');
+  });
+
+      const fadeElements = document.querySelectorAll('.fade-in');
+    
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+    
+      fadeElements.forEach(el => observer.observe(el));
+    </script>
+
+
   </body>
 </html>
